@@ -846,67 +846,52 @@
   <!-- Skills filter JS (hover = preview, click = lock) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const pills = document.querySelectorAll('#skills .skill-category');
-      const cards = document.querySelectorAll('#skills .skill-card');
-
-      // Category → tags mapping (matches your ask)
+      const pills  = document.querySelectorAll('#skills .skill-category');
+      const cards  = document.querySelectorAll('#skills .skill-card');
+  
+      // Much stricter tag map (no generic overlaps)
       const categoryToTags = {
-        all: ['programming', 'analysis', 'engineering', 'cloud', 'ml', 'web'],
-
-        analysis: [
-          'analysis', 'programming',
-          // include DBs for analysis
-          'sql', 'mysql', 'postgresql', 'mongodb'
-        ],
-
-        engineering: [
-          'engineering', 'cloud', 'programming',
-          // core engineering stack
-          'python', 'r', 'hadoop', 'spark', 'pyspark', 'databricks',
-          'kafka', 'aws', 'docker', 'kubernetes', 'git',
-          // plus DBs
-          'sql', 'mysql', 'postgresql', 'mongodb', 'database'
-        ],
-
-        programming: ['programming', 'web', 'html', 'css', 'javascript', 'java', 'c', 'php', 'python', 'r'],
-
-        cloud: ['cloud', 'engineering', 'aws', 'hadoop', 'spark', 'pyspark', 'databricks', 'kafka', 'docker', 'kubernetes'],
-
-        ml: ['ml', 'analysis', 'pandas', 'numpy', 'scikitlearn', 'tensorflow', 'pytorch', 'keras', 'svm', 'regression', 'cnn', 'rnn', 'transformers']
+        all: [],
+        analysis: ['analysis','pandas','numpy','matplotlib','plotly','excel','tableau','powerbi','sql'],
+        engineering: ['engineering','sql','mysql','postgresql','mongodb','hadoop','spark','pyspark','databricks','kafka','aws','docker','kubernetes','git'],
+        programming: ['python','java','c','javascript','php','html','css','bash','shell','react'],
+        cloud: ['cloud','aws','hadoop','spark','pyspark','databricks','kafka','docker','kubernetes'],
+        ml: ['ml','scikitlearn','tensorflow','pytorch','keras','matlab']
       };
-
-      const getTags = (card) => (card.dataset.tags || '')
-        .split(/\s+/)
-        .map(s => s.trim().toLowerCase())
-        .filter(Boolean);
-
-      const applyFilter = (categoryKey) => {
-        const selected = (categoryKey || 'all').toLowerCase();
-        const wanted = new Set((categoryToTags[selected] || []).map(s => s.toLowerCase()));
-
+  
+      const getTags = el => (el.dataset.tags || '')
+        .split(/\s+/).map(s => s.trim().toLowerCase()).filter(Boolean);
+  
+      function applyFilter(key='all') {
+        const selected = key.toLowerCase();
+        const wanted = new Set(categoryToTags[selected] || []);
+  
+        // pill active state
         pills.forEach(p => p.classList.toggle('active', p.dataset.category === selected));
-
+  
+        // fade non-matching cards
         cards.forEach(card => {
           const tags = getTags(card);
-          const matches = selected === 'all' ? true : tags.some(t => wanted.has(t));
+          const matches = (selected === 'all') ? true : tags.some(t => wanted.has(t));
           card.classList.toggle('dimmed', !matches);
         });
-      };
-
-      // Hover preview; click to lock
-      let lockedCategory = 'all';
-      applyFilter(lockedCategory);
-
+      }
+  
+      // initial state
+      let locked = 'all';
+      applyFilter(locked);
+  
+      // hover preview; click to lock
       pills.forEach(pill => {
         pill.addEventListener('mouseenter', () => applyFilter(pill.dataset.category));
-        pill.addEventListener('mouseleave', () => applyFilter(lockedCategory));
+        pill.addEventListener('mouseleave', () => applyFilter(locked));
         pill.addEventListener('click', () => {
-          lockedCategory = pill.dataset.category;
-          applyFilter(lockedCategory);
+          locked = pill.dataset.category;
+          applyFilter(locked);
         });
       });
     });
   </script>
-
+  
 </body>
 </html>
