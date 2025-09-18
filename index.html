@@ -173,20 +173,7 @@
 
     </section><!-- /About Section -->
 
-  <!-- Skills Section -->
-<section id="skills" class="skills section">
-  <div class="container text-center">
-    <h2 class="section-title">Skills</h2>
 
-    <!-- Category headings -->
-    <div class="skills-categories d-flex justify-content-center flex-wrap gap-4 mb-5">
-      <span class="skill-category" data-category="all">All</span>
-      <span class="skill-category" data-category="analysis">Data Analysis</span>
-      <span class="skill-category" data-category="engineering">Data Engineering</span>
-      <span class="skill-category" data-category="programming">Programming</span>
-      <span class="skill-category" data-category="cloud">Cloud & Big Data</span>
-      <span class="skill-category" data-category="ml">Machine Learning</span>
-    </div>
 
    <!-- Skills Section -->
 <section id="skills" class="skills section">
@@ -980,6 +967,7 @@
               }
             }
           </script>
+
           <div class="swiper-wrapper">
 
             <div class="swiper-slide">
@@ -1196,6 +1184,45 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      const categories = document.querySelectorAll('#skills .skill-category');
+      const cards = document.querySelectorAll('#skillsGrid .skill-card');
+  
+      function applyFilter(category) {
+        const cat = (category || 'all').toLowerCase();
+        cards.forEach(card => {
+          const tags = (card.dataset.tags || '').toLowerCase().split(/\s+/);
+          const match = cat === 'all' || tags.includes(cat);
+          card.classList.toggle('dimmed', !match);
+        });
+      }
+  
+      // default active = "all"
+      const defaultActive = document.querySelector('#skills .skill-category[data-category="all"]');
+      if (defaultActive) defaultActive.classList.add('active');
+      applyFilter('all');
+  
+      categories.forEach(catEl => {
+        const cat = catEl.dataset.category;
+  
+        // Hover → temporary highlight
+        catEl.addEventListener('mouseenter', () => applyFilter(cat));
+        catEl.addEventListener('mouseleave', () => {
+          const active = document.querySelector('#skills .skill-category.active');
+          applyFilter(active ? active.dataset.category : 'all');
+        });
+  
+        // Click → set active category
+        catEl.addEventListener('click', () => {
+          categories.forEach(c => c.classList.remove('active'));
+          catEl.classList.add('active');
+          applyFilter(cat);
+        });
+      });
+    })();
+  </script>
+  
 
 </body>
 

@@ -1622,96 +1622,92 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Skills Section (custom)
+# Skills Section – bold title, bigger gray pills, nicer spacing
 --------------------------------------------------------------*/
-#skills {
-  background: var(--surface-color);
+
+/* Make the SKILLS title bold, uppercase, with a soft shadow */
+#skills .section-title,
+h2.section-title {
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(0,0,0,.08);
 }
 
-#skills .section-title { /* you already have global .section-title—this is just fine-tuning */
-  padding-bottom: 30px;
+/* Category pill bar: bigger pills and more spacing */
+#skills .skills-categories {
+  gap: 18px 28px;            /* more space between pills */
+  margin-bottom: 34px;       /* a bit more breathing room above the grid */
 }
 
-.skills-categories {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px 18px;
-  margin-bottom: 28px;
-  font-weight: 600;
-}
-
-.skill-category {
+/* Neutral gray styling for pills (no blue), with subtle shadow */
+#skills .skill-category {
   cursor: pointer;
-  padding: 6px 14px;
+  padding: 10px 18px;        /* bigger pills */
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
-  color: color-mix(in srgb, var(--default-color), transparent 10%);
+  border: 1px solid #e7e7e9;
+  background: #ffffff;
+  color: #333;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
   transition: all .25s ease;
   user-select: none;
 }
 
-.skill-category:hover,
-.skill-category.active {
-  background: var(--accent-color);
-  color: var(--contrast-color);
-  border-color: var(--accent-color);
+/* Hover → light gray + a touch more shadow (still not blue) */
+#skills .skill-category:hover {
+  background: #efefef;
+  color: #111;
+  border-color: #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
-/* Skill cards */
-.skill-card {
-  background: var(--surface-color);
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+/* Active state (selected) */
+#skills .skill-category.active {
+  background: #eaeaea;
+  color: #111;
+  border-color: #d9d9d9;
+  box-shadow: 0 4px 10px rgba(0,0,0,.10);
+}
+
+/* Make each card feel a little bolder too */
+#skills .skill-card {
+  border: 1px solid #ececec;
   border-radius: 14px;
-  padding: 12px 8px;
-  text-align: center;
-  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
 }
 
-.skill-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(0,0,0,.06);
+#skills .skill-card span {
+  font-weight: 700;          /* bolder labels */
 }
 
-/* Uniform icon sizing */
-.skill-card img,
-.skill-logo {
-  width: 55px;      /* << change this to 48px or 40px if you want smaller */
+/* Keep uniform icon sizing (tweak if you want more/less per row) */
+#skills .skill-logo,
+#skills .skill-card img {
+  width: 55px;
   height: 55px;
   object-fit: contain;
-  display: block;
-  margin: 4px auto 8px;
-  transition: transform .22s ease;
 }
 
-.skill-card:hover img {
-  transform: scale(1.06);
+@media (max-width: 992px) {
+  #skills .skill-logo,
+  #skills .skill-card img { width: 48px; height: 48px; }
 }
 
-.skill-card span {
-  display: block;
-  font-size: .85rem;
-  color: color-mix(in srgb, var(--default-color), transparent 10%);
+@media (max-width: 576px) {
+  #skills .skill-logo,
+  #skills .skill-card img { width: 42px; height: 42px; }
+  #skills .skill-card span { font-size: .78rem; }
 }
 
-/* “Dim” look for non-relevant skills (JS will toggle this class later) */
-.skill-card.dimmed {
+/* Dim non-highlighted skills (JS toggles this class) */
+#skills .skill-card.dimmed {
   filter: grayscale(100%) opacity(.45);
   box-shadow: none;
   transform: none;
 }
 
-/* Responsive tweaks */
-@media (max-width: 992px) {
-  .skill-card img,
-  .skill-logo { width: 48px; height: 48px; }
-}
-
-@media (max-width: 576px) {
-  .skill-card img,
-  .skill-logo { width: 42px; height: 42px; }
-  .skill-card span { font-size: .78rem; }
-}
 
 /*--------------------------------------------------------------
 # Starter Section Section
