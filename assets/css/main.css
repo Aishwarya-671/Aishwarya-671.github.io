@@ -1946,24 +1946,25 @@ section,
   #about .about-info p { font-size: 16px; }
 }
 
-/* Hero buttons */
+/* Hero buttons (bigger + more visible) */
 .hero-buttons {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 28px;
 }
 
 .hero-buttons .hero-btn {
-  padding: 12px 28px;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 14px 34px;              /* bigger size */
+  font-size: 1.1rem;               /* larger text */
+  font-weight: 700;                /* bolder text */
   border-radius: 50px;
   transition: all 0.3s ease;
-  text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  text-transform: uppercase;
 }
 
 /* Resume button */
@@ -1974,8 +1975,8 @@ section,
 }
 .hero-buttons .resume-btn:hover {
   background: #3393ff;
-  transform: scale(1.08);
-  box-shadow: 0 0 14px rgba(0,120,255,0.5);
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(0,120,255,0.6);
 }
 
 /* LinkedIn button */
@@ -1986,8 +1987,8 @@ section,
 }
 .hero-buttons .linkedin-btn:hover {
   background: #004182;
-  transform: scale(1.08);
-  box-shadow: 0 0 14px rgba(10,102,194,0.5);
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(10,102,194,0.6);
 }
 
 /* Contact button */
@@ -1999,6 +2000,6 @@ section,
 .hero-buttons .contact-btn:hover {
   background: #fff;
   color: #000;
-  transform: scale(1.08);
-  box-shadow: 0 0 14px rgba(255,255,255,0.4);
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(255,255,255,0.5);
 }
