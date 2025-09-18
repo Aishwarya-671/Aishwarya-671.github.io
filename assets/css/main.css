@@ -1621,42 +1621,39 @@ section,
   color: var(--accent-color);
 }
 /* -------------------------------------------------------------
-   SKILLS — balanced size, bold text, 8 per row
+   SKILLS — big header, stronger hover, enlarge matches on filter
    ------------------------------------------------------------- */
 
 /* ---------- Section title ---------- */
 #skills .section-title h2 {
-  font-size: 56px;              /* big heading */
-  font-weight: 900;             /* extra bold */
-  letter-spacing: 0.25em;       /* spread out */
+  font-size: clamp(64px, 7.5vw, 112px);  /* much bigger */
+  font-weight: 900;
+  letter-spacing: 0.28em;                /* spread out */
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 40px;
-  transition: all 0.3s ease;
+  margin-bottom: 44px;
+  transition: transform .35s ease, letter-spacing .35s ease, text-shadow .35s ease, color .35s ease;
   display: inline-block;
-  cursor: default;
 }
 
 #skills .section-title h2:hover {
-  color: var(--accent-color);   /* blue highlight */
-  transform: scale(1.08);       /* enlarge */
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  letter-spacing: 0.3em;        /* spread out more */
+  color: var(--accent-color);
+  transform: scale(1.12);
+  letter-spacing: 0.34em;
+  text-shadow: 0 8px 28px rgba(0,0,0,.25);
 }
 
 #skills .section-title h2::after {
   content: "";
   display: block;
-  width: 60px;
+  width: 70px;
   height: 3px;
   background: var(--accent-color);
-  margin: 12px auto 0;
-  transition: width 0.3s ease;
+  margin: 14px auto 0;
+  transition: width .35s ease;
 }
 
-#skills .section-title h2:hover::after {
-  width: 120px; /* animated underline */
-}
+#skills .section-title h2:hover::after { width: 140px; }
 
 /* ---------- Category pills ---------- */
 #skills .skills-categories {
@@ -1675,17 +1672,17 @@ section,
   color: #333;
   font-weight: 700;
   font-size: 1rem;
-  letter-spacing: 0.02em;
+  letter-spacing: .02em;
   box-shadow: 0 1px 6px rgba(0,0,0,.05);
-  transition: all 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
   user-select: none;
 }
 
 #skills .skill-category:hover {
   background: #f7f7f7;
-  border-color: #999; 
+  border-color: #999;
   box-shadow: 0 3px 10px rgba(0,0,0,.12);
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1.04);
 }
 
 #skills .skill-category.active {
@@ -1697,8 +1694,8 @@ section,
 
 /* ---------- Skill cards ---------- */
 #skills .skill-card {
-  width: 72px;     
-  height: 72px;
+  width: 76px;                 /* a touch bigger */
+  height: 76px;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -1706,63 +1703,153 @@ section,
   justify-content: center;
   border: 1px solid #e2e2e2;
   background: #fff;
-  box-shadow: 0 1px 5px rgba(0,0,0,.05);
-  transition: all 0.2s ease;
-  margin: 6px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, filter .22s ease;
+  margin: 8px;
   text-align: center;
   padding: 6px;
+  will-change: transform;
 }
 
 #skills .skill-card:hover {
-  background: #fff;
-  border-color: #999; /* gray outline */
-  box-shadow: 0 4px 10px rgba(0,0,0,.15); /* gray shadow */
-  transform: scale(1.07); /* enlarge smoothly */
+  border-color: #9a9a9a;            /* gray outline */
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  transform: scale(1.16);           /* stronger hover enlarge */
 }
 
 #skills .skill-card img,
 #skills .skill-logo {
-  width: 28px;   
-  height: 28px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   margin-bottom: 6px;
-  transition: filter .2s ease;
 }
 
 #skills .skill-card span {
-  font-size: 0.72rem;   
-  font-weight: 800;     
+  font-size: 0.78rem;
+  font-weight: 900;
   line-height: 1.2;
 }
 
-/* Dim non-matching */
+/* When filtering: auto-enlarge all matching (non-dimmed) cards */
+#skills:has(.skill-category.active:not([data-category="all"])) .skill-card:not(.dimmed) {
+  transform: scale(1.10);           /* baseline boost while filtered */
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  border-color: #d0d0d0;
+}
+
+/* And let hover stack on top of that */
+#skills:has(.skill-category.active:not([data-category="all"])) .skill-card:not(.dimmed):hover {
+  transform: scale(1.20);
+}
+
+/* Fade non-matching */
 #skills .skill-card.dimmed {
   filter: grayscale(100%) opacity(.45);
   box-shadow: none;
   transform: none;
 }
 
-/* ---------- Layout tweaks ---------- */
+/* ---------- Layout: 8 per row on desktop; center last row ---------- */
 @media (min-width: 992px) {
   #skills .col-md-2 {
-    flex: 0 0 12.5%; /* 100 ÷ 8 = 12.5% */
+    flex: 0 0 12.5%;
     max-width: 12.5%;
   }
 }
 
-#skills .row {
-  justify-content: center; /* center last row */
-}
+#skills .row { justify-content: center; }
 
 /* Tablet */
 @media (max-width: 1199.98px) {
-  #skills .skill-card { width: 68px; height: 68px; }
-  #skills .skill-card img { width: 26px; height: 26px; }
+  #skills .skill-card { width: 72px; height: 72px; }
+  #skills .skill-card img { width: 28px; height: 28px; }
 }
 
 /* Mobile */
 @media (max-width: 576px) {
-  #skills .skill-card { width: 62px; height: 62px; }
+  #skills .skill-card { width: 64px; height: 64px; }
   #skills .skill-card img { width: 24px; height: 24px; }
-  #skills .skill-card span { font-size: 0.65rem; }
+  #skills .skill-card span { font-size: .66rem; }
+}
+
+/* -----------------------------
+   ABOUT — image + info layout
+   ----------------------------- */
+
+/* Center the two main columns vertically */
+#about .row.gy-4,
+#about .row.justify-content-between.gy-4 {
+  align-items: center; /* works because .row is flex in Bootstrap */
+}
+
+/* Image: fill its column nicely, keep aspect, add subtle polish */
+#about .col-lg-5 img.img-fluid {
+  width: 100%;
+  height: auto;
+  max-height: 460px;          /* keeps tall images from overflowing */
+  object-fit: contain;        /* no crop */
+  display: block;
+  margin: 0 auto;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+/* Info block spacing & typography */
+#about .about-info p {
+  margin-bottom: 10px;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+#about .about-info strong {
+  color: var(--heading-color);
+  font-weight: 800;
+}
+
+/* Tidy the container after removing progress bars */
+#about .container {
+  padding: 32px 28px; /* a bit more breathing room */
+}
+
+/* Desktop refinements */
+@media (min-width: 992px) {
+  /* Slightly widen the image column visual presence without changing HTML classes */
+  #about .col-lg-5 {
+    flex: 0 0 42%;
+    max-width: 42%;
+  }
+  #about .col-lg-7 {
+    flex: 0 0 58%;
+    max-width: 58%;
+  }
+}
+
+/* Tablet */
+@media (max-width: 991.98px) {
+  #about .col-lg-5,
+  #about .col-lg-7 {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  #about .col-lg-5 {
+    margin-bottom: 16px; /* space between image and info when stacked */
+  }
+  #about .col-lg-5 img.img-fluid {
+    max-height: 360px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 575.98px) {
+  #about .container {
+    padding: 24px 18px;
+  }
+  #about .about-info p {
+    font-size: 16px;
+  }
+  #about .col-lg-5 img.img-fluid {
+    max-height: 300px;
+    border-radius: 12px;
+  }
 }
