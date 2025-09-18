@@ -1628,29 +1628,32 @@ section,
   margin-right: 8px;
   color: var(--accent-color);
 }
-/* -------------------------------------------------------------
-   SKILLS — big header, stronger hover, enlarge matches on filter
-   ------------------------------------------------------------- */
+/* =============================================================
+   SKILLS — big interactive heading, tighter layout, 8/row grid,
+   stronger hover, enlarge matches when filtered
+   ============================================================= */
 
-/* ---------- Section title ---------- */
+/* ---------- Section title (support both markup variants) ---------- */
+#skills h2.section-title,
 #skills .section-title h2 {
-  font-size: clamp(64px, 7.5vw, 112px);  /* much bigger */
+  font-size: clamp(64px, 7.5vw, 112px) !important;
   font-weight: 900;
-  letter-spacing: 0.28em;                /* spread out */
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 44px;
-  transition: transform .35s ease, letter-spacing .35s ease, text-shadow .35s ease, color .35s ease;
+  margin-bottom: 28px;                     /* tighter to fit more on screen */
+  transition: transform .35s ease, letter-spacing .35s ease,
+              text-shadow .35s ease, color .35s ease;
   display: inline-block;
 }
-
+#skills h2.section-title:hover,
 #skills .section-title h2:hover {
   color: var(--accent-color);
   transform: scale(1.12);
   letter-spacing: 0.34em;
   text-shadow: 0 8px 28px rgba(0,0,0,.25);
 }
-
+#skills h2.section-title::after,
 #skills .section-title h2::after {
   content: "";
   display: block;
@@ -1660,17 +1663,18 @@ section,
   margin: 14px auto 0;
   transition: width .35s ease;
 }
-
-#skills .section-title h2:hover::after { width: 140px; }
+#skills h2.section-title:hover::after,
+#skills .section-title h2:hover::after {
+  width: 140px;
+}
 
 /* ---------- Category pills ---------- */
 #skills .skills-categories {
-  gap: 16px 20px;
-  margin-bottom: 32px;
+  gap: 12px 16px;               /* tighter */
+  margin-bottom: 18px;          /* tighter */
   justify-content: center;
   flex-wrap: wrap;
 }
-
 #skills .skill-category {
   cursor: pointer;
   padding: 10px 22px;
@@ -1682,17 +1686,16 @@ section,
   font-size: 1rem;
   letter-spacing: .02em;
   box-shadow: 0 1px 6px rgba(0,0,0,.05);
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  transition: transform .2s ease, box-shadow .2s ease,
+              border-color .2s ease, background .2s ease;
   user-select: none;
 }
-
 #skills .skill-category:hover {
   background: #f7f7f7;
   border-color: #999;
   box-shadow: 0 3px 10px rgba(0,0,0,.12);
   transform: translateY(-1px) scale(1.04);
 }
-
 #skills .skill-category.active {
   background: #efefef;
   color: #000;
@@ -1700,9 +1703,25 @@ section,
   box-shadow: 0 3px 10px rgba(0,0,0,.12);
 }
 
+/* ---------- Grid layout (fits on screen better) ---------- */
+#skills #skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);  /* desktop: 8 per row */
+  gap: 18px 22px;                         /* row-gap, column-gap */
+  justify-items: center;
+  align-items: start;
+  padding-inline: 6px;
+}
+/* neutralize Bootstrap column sizing inside the grid */
+#skills #skillsGrid > [class*="col-"] {
+  width: auto !important;
+  max-width: none !important;
+  flex: 0 0 auto !important;
+}
+
 /* ---------- Skill cards ---------- */
 #skills .skill-card {
-  width: 76px;                 /* a touch bigger */
+  width: 76px;
   height: 76px;
   border-radius: 50%;
   display: flex;
@@ -1712,19 +1731,18 @@ section,
   border: 1px solid #e2e2e2;
   background: #fff;
   box-shadow: 0 1px 6px rgba(0,0,0,.06);
-  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, filter .22s ease;
-  margin: 8px;
+  transition: transform .22s ease, box-shadow .22s ease,
+              border-color .22s ease, filter .22s ease;
+  margin: 0;                      /* grid controls spacing */
   text-align: center;
   padding: 6px;
   will-change: transform;
 }
-
 #skills .skill-card:hover {
-  border-color: #9a9a9a;            /* gray outline */
+  border-color: #9a9a9a;          /* gray outline */
   box-shadow: 0 10px 22px rgba(0,0,0,.18);
-  transform: scale(1.16);           /* stronger hover enlarge */
+  transform: scale(1.16);         /* stronger hover enlarge */
 }
-
 #skills .skill-card img,
 #skills .skill-logo {
   width: 30px;
@@ -1732,7 +1750,6 @@ section,
   object-fit: contain;
   margin-bottom: 6px;
 }
-
 #skills .skill-card span {
   font-size: 0.78rem;
   font-weight: 900;
@@ -1741,11 +1758,10 @@ section,
 
 /* When filtering: auto-enlarge all matching (non-dimmed) cards */
 #skills:has(.skill-category.active:not([data-category="all"])) .skill-card:not(.dimmed) {
-  transform: scale(1.10);           /* baseline boost while filtered */
+  transform: scale(1.10);
   box-shadow: 0 6px 16px rgba(0,0,0,.12);
   border-color: #d0d0d0;
 }
-
 /* And let hover stack on top of that */
 #skills:has(.skill-category.active:not([data-category="all"])) .skill-card:not(.dimmed):hover {
   transform: scale(1.20);
@@ -1758,45 +1774,50 @@ section,
   transform: none;
 }
 
-/* ---------- Layout: 8 per row on desktop; center last row ---------- */
-@media (min-width: 992px) {
-  #skills .col-md-2 {
-    flex: 0 0 12.5%;
-    max-width: 12.5%;
-  }
+/* ---------- Responsive grid ---------- */
+@media (min-width: 1400px) {
+  /* Optional: pack more on ultra-wide screens */
+  #skills #skillsGrid { grid-template-columns: repeat(9, 1fr); }
 }
-
-#skills .row { justify-content: center; }
-
-/* Tablet */
 @media (max-width: 1199.98px) {
+  #skills #skillsGrid { grid-template-columns: repeat(7, 1fr); }
+}
+@media (max-width: 991.98px) {
+  #skills #skillsGrid { grid-template-columns: repeat(6, 1fr); }
+}
+@media (max-width: 767.98px) {
+  #skills #skillsGrid { grid-template-columns: repeat(4, 1fr); gap: 16px 18px; }
   #skills .skill-card { width: 72px; height: 72px; }
-  #skills .skill-card img { width: 28px; height: 28px; }
+}
+@media (max-width: 479.98px) {
+  #skills #skillsGrid { grid-template-columns: repeat(3, 1fr); gap: 14px 16px; }
+  #skills .skill-card { width: 68px; height: 68px; }
 }
 
-/* Mobile */
-@media (max-width: 576px) {
-  #skills .skill-card { width: 64px; height: 64px; }
-  #skills .skill-card img { width: 24px; height: 24px; }
-  #skills .skill-card span { font-size: .66rem; }
-}
+/* =============================================================
+   ABOUT — image + info side-by-side, polished typography,
+   subtle highlight on hover, responsive stacking
+   ============================================================= */
 
-/* -----------------------------
-   ABOUT — image + info layout
-   ----------------------------- */
+/* Subtle section highlight on hover */
+#about:hover .container {
+  box-shadow: 0 16px 44px rgba(0,0,0,.10);
+  transition: box-shadow .3s ease;
+  border-radius: 18px;
+}
 
 /* Center the two main columns vertically */
 #about .row.gy-4,
 #about .row.justify-content-between.gy-4 {
-  align-items: center; /* works because .row is flex in Bootstrap */
+  align-items: center;
 }
 
-/* Image: fill its column nicely, keep aspect, add subtle polish */
+/* Image: fill its column nicely, keep aspect */
 #about .col-lg-5 img.img-fluid {
   width: 100%;
   height: auto;
-  max-height: 460px;          /* keeps tall images from overflowing */
-  object-fit: contain;        /* no crop */
+  max-height: 460px;
+  object-fit: contain;
   display: block;
   margin: 0 auto;
   border-radius: 14px;
@@ -1809,7 +1830,6 @@ section,
   font-size: 17px;
   line-height: 1.4;
 }
-
 #about .about-info strong {
   color: var(--heading-color);
   font-weight: 800;
@@ -1817,47 +1837,111 @@ section,
 
 /* Tidy the container after removing progress bars */
 #about .container {
-  padding: 32px 28px; /* a bit more breathing room */
+  padding: 32px 28px;
 }
 
-/* Desktop refinements */
+/* Desktop width balance (without touching your HTML) */
 @media (min-width: 992px) {
-  /* Slightly widen the image column visual presence without changing HTML classes */
-  #about .col-lg-5 {
-    flex: 0 0 42%;
-    max-width: 42%;
-  }
-  #about .col-lg-7 {
-    flex: 0 0 58%;
-    max-width: 58%;
-  }
+  #about .col-lg-5 { flex: 0 0 42%; max-width: 42%; }
+  #about .col-lg-7 { flex: 0 0 58%; max-width: 58%; }
 }
 
-/* Tablet */
+/* Tablet: stack with nice spacing */
 @media (max-width: 991.98px) {
   #about .col-lg-5,
-  #about .col-lg-7 {
-    max-width: 100%;
-    flex: 0 0 100%;
-  }
-  #about .col-lg-5 {
-    margin-bottom: 16px; /* space between image and info when stacked */
-  }
-  #about .col-lg-5 img.img-fluid {
-    max-height: 360px;
-  }
+  #about .col-lg-7 { max-width: 100%; flex: 0 0 100%; }
+  #about .col-lg-5 { margin-bottom: 16px; }
+  #about .col-lg-5 img.img-fluid { max-height: 360px; }
 }
 
 /* Small phones */
 @media (max-width: 575.98px) {
-  #about .container {
-    padding: 24px 18px;
-  }
-  #about .about-info p {
-    font-size: 16px;
-  }
+  #about .container { padding: 24px 18px; }
+  #about .about-info p { font-size: 16px; }
   #about .col-lg-5 img.img-fluid {
     max-height: 300px;
     border-radius: 12px;
   }
+}
+
+/* -----------------------------
+   ABOUT — layout + polish
+   ----------------------------- */
+
+/* Align the two main columns nicely */
+#about .row.gy-4 { align-items: center; }
+
+/* Image styling */
+#about img.img-fluid {
+  width: 100%;
+  height: auto;
+  max-height: 460px;
+  object-fit: contain;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+/* Contact/info text tweaks */
+#about .about-info p {
+  margin-bottom: 10px;
+  font-size: 17px;
+  line-height: 1.45;
+}
+#about .about-info strong {
+  font-weight: 800;
+  color: var(--heading-color);
+}
+
+/* About me card */
+#about .about-me {
+  background: var(--surface-color);
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 24px 22px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.06);
+}
+#about .about-me h4 {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  position: relative;
+}
+#about .about-me h4::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  margin-top: 8px;
+}
+#about .about-me p {
+  font-size: 16.5px;
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+/* Section hover highlight */
+#about .container {
+  transition: background-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+#about:hover .container {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 96%);
+  box-shadow: 0 18px 38px rgba(0,0,0,.12);
+  transform: translateY(-2px);
+}
+
+/* Desktop: balance image/info split a bit */
+@media (min-width: 992px) {
+  #about .col-lg-5 { flex: 0 0 42%; max-width: 42%; }
+  #about .col-lg-7 { flex: 0 0 58%; max-width: 58%; }
+}
+
+/* Tablet/phone stack */
+@media (max-width: 991.98px) {
+  #about img.img-fluid { max-height: 360px; }
+  #about .about-me { margin-top: 6px; }
+}
+@media (max-width: 575.98px) {
+  #about img.img-fluid { max-height: 300px; border-radius: 12px; }
+  #about .about-info p { font-size: 16px; }
 }
