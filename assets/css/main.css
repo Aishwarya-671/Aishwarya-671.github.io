@@ -1945,3 +1945,60 @@ section,
   #about img.img-fluid { max-height: 300px; border-radius: 12px; }
   #about .about-info p { font-size: 16px; }
 }
+
+/* Hero buttons */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-buttons .hero-btn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Resume button */
+.hero-buttons .resume-btn {
+  background: var(--accent-color);
+  border: none;
+  color: #fff;
+}
+.hero-buttons .resume-btn:hover {
+  background: #3393ff;
+  transform: scale(1.08);
+  box-shadow: 0 0 14px rgba(0,120,255,0.5);
+}
+
+/* LinkedIn button */
+.hero-buttons .linkedin-btn {
+  background: #0a66c2;
+  border: none;
+  color: #fff;
+}
+.hero-buttons .linkedin-btn:hover {
+  background: #004182;
+  transform: scale(1.08);
+  box-shadow: 0 0 14px rgba(10,102,194,0.5);
+}
+
+/* Contact button */
+.hero-buttons .contact-btn {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.hero-buttons .contact-btn:hover {
+  background: #fff;
+  color: #000;
+  transform: scale(1.08);
+  box-shadow: 0 0 14px rgba(255,255,255,0.4);
+}
