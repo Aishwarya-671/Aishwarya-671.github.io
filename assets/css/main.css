@@ -630,32 +630,40 @@ section,
 /*--------------------------------------------------------------
 # Global Section Titles
 --------------------------------------------------------------*/
-.section-title {
+/* ------- SKILLS heading: big + interactive ------- */
+#skills h2.section-title {
+  font-size: clamp(64px, 7.5vw, 112px) !important; /* beat template's 32px */
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   text-align: center;
-  padding-bottom: 60px;
-  position: relative;
+  margin-bottom: 44px;
+  transition: transform .35s ease, letter-spacing .35s ease,
+              text-shadow .35s ease, color .35s ease;
+  display: inline-block;
 }
 
-.section-title h2 {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  position: relative;
+#skills h2.section-title:hover {
+  color: var(--accent-color);
+  transform: scale(1.12);
+  letter-spacing: 0.34em;
+  text-shadow: 0 8px 28px rgba(0,0,0,.25);
 }
 
-.section-title h2:after {
+#skills h2.section-title::after {
   content: "";
-  position: absolute;
   display: block;
-  width: 50px;
+  width: 70px;
   height: 3px;
   background: var(--accent-color);
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
+  margin: 14px auto 0;
+  transition: width .35s ease;
 }
+
+#skills h2.section-title:hover::after {
+  width: 140px;
+}
+
 
 .section-title p {
   margin-bottom: 0;
