@@ -1622,6 +1622,98 @@ section,
 }
 
 /*--------------------------------------------------------------
+# Skills Section (custom)
+--------------------------------------------------------------*/
+#skills {
+  background: var(--surface-color);
+}
+
+#skills .section-title { /* you already have global .section-title—this is just fine-tuning */
+  padding-bottom: 30px;
+}
+
+.skills-categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+
+.skill-category {
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  color: color-mix(in srgb, var(--default-color), transparent 10%);
+  transition: all .25s ease;
+  user-select: none;
+}
+
+.skill-category:hover,
+.skill-category.active {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  border-color: var(--accent-color);
+}
+
+/* Skill cards */
+.skill-card {
+  background: var(--surface-color);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+  border-radius: 14px;
+  padding: 12px 8px;
+  text-align: center;
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(0,0,0,.06);
+}
+
+/* Uniform icon sizing */
+.skill-card img,
+.skill-logo {
+  width: 55px;      /* << change this to 48px or 40px if you want smaller */
+  height: 55px;
+  object-fit: contain;
+  display: block;
+  margin: 4px auto 8px;
+  transition: transform .22s ease;
+}
+
+.skill-card:hover img {
+  transform: scale(1.06);
+}
+
+.skill-card span {
+  display: block;
+  font-size: .85rem;
+  color: color-mix(in srgb, var(--default-color), transparent 10%);
+}
+
+/* “Dim” look for non-relevant skills (JS will toggle this class later) */
+.skill-card.dimmed {
+  filter: grayscale(100%) opacity(.45);
+  box-shadow: none;
+  transform: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 992px) {
+  .skill-card img,
+  .skill-logo { width: 48px; height: 48px; }
+}
+
+@media (max-width: 576px) {
+  .skill-card img,
+  .skill-logo { width: 42px; height: 42px; }
+  .skill-card span { font-size: .78rem; }
+}
+
+/*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
 .starter-section {
