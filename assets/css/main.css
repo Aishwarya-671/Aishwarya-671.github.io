@@ -1620,89 +1620,31 @@ section,
   margin-right: 8px;
   color: var(--accent-color);
 }
-/*--------------------------------------------------------------
-# Skills Section – compact circular style
---------------------------------------------------------------*/
+/* -------------------------------------------------------------
+   SKILLS — compact circular cards + modern category pills
+   ------------------------------------------------------------- */
 
-/* Skill cards → circular buttons */
-#skills .skill-card {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;               /* circle */
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  transition: all 0.25s ease;
-  text-align: center;
-  padding: 8px;
+/* Section title: bold/uppercase with soft shadow */
+#skills .section-title,
+h2.section-title {
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 6px rgba(0,0,0,.08);
 }
 
-/* On hover → dark gray highlight */
-#skills .skill-card:hover {
-  background: #333;
-  color: #fff;
-  border-color: #333;
-  box-shadow: 0 4px 12px rgba(0,0,0,.15);
-  transform: scale(1.05);
-}
-
-/* Logo inside circle → smaller */
-#skills .skill-logo,
-#skills .skill-card img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  margin-bottom: 6px;
-  transition: filter .25s ease;
-}
-
-/* Dark hover should also invert logo if it's an SVG */
-#skills .skill-card:hover img {
-  filter: brightness(0) invert(1);
-}
-
-/* Text label inside circle */
-#skills .skill-card span {
-  font-size: 0.7rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-/* Smaller responsive tweaks */
-@media (max-width: 992px) {
-  #skills .skill-card { width: 85px; height: 85px; }
-  #skills .skill-logo,
-  #skills .skill-card img { width: 32px; height: 32px; }
-}
-
-@media (max-width: 576px) {
-  #skills .skill-card { width: 72px; height: 72px; }
-  #skills .skill-logo,
-  #skills .skill-card img { width: 28px; height: 28px; }
-  #skills .skill-card span { font-size: 0.6rem; }
-}
-
-
-/*--------------------------------------------------------------
-# Skill Categories – modern pill design
---------------------------------------------------------------*/
-
+/* ---------- Category pills ---------- */
 #skills .skills-categories {
-  gap: 22px 36px;              /* more spread apart */
-  margin-bottom: 40px;         /* more space before the grid */
+  gap: 22px 36px;               /* spread out the pills */
+  margin-bottom: 40px;          /* breathing room before the grid */
   justify-content: center;
   flex-wrap: wrap;
 }
 
 #skills .skill-category {
   cursor: pointer;
-  padding: 12px 28px;          /* bigger size */
-  border-radius: 999px;
+  padding: 12px 28px;           /* bigger chip */
+  border-radius: 999px;         /* pill look */
   border: 1px solid #e2e2e2;
   background: #fff;
   color: #333;
@@ -1714,19 +1656,83 @@ section,
   user-select: none;
 }
 
-/* Hover → subtle gray shadow + darker text (no blue!) */
 #skills .skill-category:hover {
-  background: #f5f5f5;
+  background: #f5f5f5;          /* gray, not blue */
   color: #111;
   border-color: #ddd;
   box-shadow: 0 4px 14px rgba(0,0,0,.08);
-  transform: translateY(-2px);  /* nice lift effect */
+  transform: translateY(-2px);  /* gentle lift */
 }
 
-/* Active (selected) pill */
 #skills .skill-category.active {
   background: #e9e9e9;
   color: #000;
   border-color: #ccc;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,.10);
+}
+
+/* ---------- Circular skill cards ---------- */
+#skills .skill-card {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  transition: all 0.25s ease;
+  margin: 10px;
+  text-align: center;
+  padding: 12px;
+}
+
+#skills .skill-card:hover {
+  background: #333;
+  color: #fff;
+  border-color: #333;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  transform: scale(1.05);
+}
+
+#skills .skill-card img,
+#skills .skill-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 6px;
+  transition: filter .25s ease;
+}
+
+#skills .skill-card:hover img {
+  filter: brightness(0) invert(1); /* invert SVGs on dark hover */
+}
+
+#skills .skill-card span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* When dimmed (non-matching) */
+#skills .skill-card.dimmed {
+  filter: grayscale(100%) opacity(.45);
+  box-shadow: none;
+  transform: none;
+}
+
+/* ---------- Responsive tweaks ---------- */
+@media (max-width: 992px) {
+  #skills .skill-card { width: 85px; height: 85px; }
+  #skills .skill-logo,
+  #skills .skill-card img { width: 32px; height: 32px; }
+}
+
+@media (max-width: 576px) {
+  #skills .skill-card { width: 72px; height: 72px; }
+  #skills .skill-logo,
+  #skills .skill-card img { width: 28px; height: 28px; }
+  #skills .skill-card span { font-size: 0.6rem; }
 }
