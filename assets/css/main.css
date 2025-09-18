@@ -1636,7 +1636,7 @@ section,
 /* ---------- Section title (support both markup variants) ---------- */
 #skills h2.section-title,
 #skills .section-title h2 {
-  font-size: clamp(64px, 7.5vw, 112px) !important;
+  font-size: clamp(36px, 4vw, 56px) !important;
   font-weight: 900;
   letter-spacing: 0.28em;
   text-transform: uppercase;
