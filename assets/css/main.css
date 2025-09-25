@@ -2217,3 +2217,49 @@ section,
   box-shadow: 0 0 18px rgba(37,162,68,0.5);
 }
 
+/* Compact layout modifier */
+.hero-buttons--compact {
+  gap: 14px;                    /* less space between buttons */
+  flex-wrap: wrap;              /* wrap nicely if needed */
+}
+
+/* Compact button sizing */
+.hero-buttons--compact .hero-btn {
+  padding: 10px 20px;           /* smaller */
+  font-size: 0.98rem;           /* slightly smaller text */
+  gap: 8px;                     /* icon/text gap */
+  border-radius: 42px;          /* still pill-ish, a bit tighter */
+  transform: none;              /* reset scale by default */
+}
+
+/* Softer hover (less jumpy to avoid crowding) */
+.hero-buttons--compact .hero-btn:hover {
+  transform: translateY(-1px) scale(1.06);
+  box-shadow: 0 6px 16px rgba(0,0,0,.18);
+}
+
+/* GitHub button style */
+.hero-buttons .github-btn {
+  background: #24292e;          /* GitHub dark */
+  border: none;
+  color: #fff;
+}
+.hero-buttons .github-btn:hover {
+  background: #1f2328;
+}
+
+/* Keep your existing button color schemes working */
+.hero-buttons .resume-btn { /* already in your CSS */ }
+.hero-buttons .linkedin-btn { /* already in your CSS */ }
+.hero-buttons .contact-btn { /* already in your CSS */ }
+.hero-buttons .mail-btn {    /* from earlier reply, or keep your green scheme */ }
+
+/* Responsive: make them a touch smaller on narrow screens */
+@media (max-width: 480px) {
+  .hero-buttons--compact { gap: 10px; }
+  .hero-buttons--compact .hero-btn {
+    padding: 9px 16px;
+    font-size: 0.95rem;
+  }
+}
+
