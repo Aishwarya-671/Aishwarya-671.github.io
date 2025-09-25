@@ -2263,3 +2263,29 @@ section,
   }
 }
 
+/* Make footer dark like hero */
+#footer {
+  --background-color: #060606;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #252525;
+  --contrast-color: #ffffff;
+  background-color: var(--background-color);
+  color: var(--default-color);
+}
+
+/* Make footer links/icons pop a bit more on dark */
+#footer .social-links a {
+  border-color: color-mix(in srgb, var(--default-color), transparent 30%);
+  color: color-mix(in srgb, var(--default-color), transparent 35%);
+}
+#footer .social-links a:hover {
+  color: var(--default-color);
+  border-color: var(--default-color);
+}
+#footer .credits a {
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+}
+#footer .credits a:hover {
+  color: var(--default-color);
+}
