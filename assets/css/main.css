@@ -2161,23 +2161,25 @@ section,
 }
 .project-card__stack strong { font-weight: 800; }
 
-/* --- GitHub badge on project cards that link to GitHub --- */
+/* --- GitHub badge: bottom-left, always visible --- */
 .project-card .gh-badge {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 36px; height: 36px;
+  bottom: 14px;
+  left: 14px;
+  width: 34px; height: 34px;
   display: grid; place-items: center;
   border-radius: 50%;
-  background: #0d1117;      /* GitHub dark */
+  background: #0d1117;
   color: #fff;
   box-shadow: 0 6px 16px rgba(0,0,0,.18);
-  opacity: .92;
+  opacity: .9;
   transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+  z-index: 4; /* make sure it sits above text & image */
 }
 .project-card .gh-badge i { font-size: 18px; line-height: 0; }
 .project-card:hover .gh-badge {
-  transform: scale(1.08);
+  transform: scale(1.1);
   opacity: 1;
   box-shadow: 0 10px 22px rgba(0,0,0,.22);
 }
+
