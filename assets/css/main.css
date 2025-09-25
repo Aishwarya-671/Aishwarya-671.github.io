@@ -2132,3 +2132,52 @@ section,
     transition: none !important;
   }
 }
+
+/* ===== Project tech tags ===== */
+.project-card__tags {
+  margin: 10px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.project-tag {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
+  color: color-mix(in srgb, var(--heading-color), transparent 10%);
+  white-space: nowrap;
+}
+/* --- Project tech stack line --- */
+.project-card__stack {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--default-color), transparent 15%);
+}
+.project-card__stack strong { font-weight: 800; }
+
+/* --- GitHub badge on project cards that link to GitHub --- */
+.project-card .gh-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #0d1117;      /* GitHub dark */
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.18);
+  opacity: .92;
+  transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+}
+.project-card .gh-badge i { font-size: 18px; line-height: 0; }
+.project-card:hover .gh-badge {
+  transform: scale(1.08);
+  opacity: 1;
+  box-shadow: 0 10px 22px rgba(0,0,0,.22);
+}
