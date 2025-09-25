@@ -2161,25 +2161,48 @@ section,
 }
 .project-card__stack strong { font-weight: 800; }
 
-/* --- GitHub badge: bottom-left, always visible --- */
-.project-card .gh-badge {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-  width: 34px; height: 34px;
-  display: grid; place-items: center;
-  border-radius: 50%;
+/* --- Project meta row (stack + chips) --- */
+.project-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-top: 10px;
+}
+
+/* Keep your bold stack line but allow it to sit in the meta row */
+.project-card__stack {
+  margin: 0;                  /* we’ll control spacing via the meta row */
+  font-size: 14px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--default-color), transparent 15%);
+}
+.project-card__stack strong { font-weight: 800; }
+
+/* GitHub chip (not a nested link; the whole card is already an <a>) */
+.gh-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
   background: #0d1117;
   color: #fff;
-  box-shadow: 0 6px 16px rgba(0,0,0,.18);
-  opacity: .9;
-  transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
-  z-index: 4; /* make sure it sits above text & image */
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .01em;
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  user-select: none;
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
 }
-.project-card .gh-badge i { font-size: 18px; line-height: 0; }
-.project-card:hover .gh-badge {
-  transform: scale(1.1);
-  opacity: 1;
-  box-shadow: 0 10px 22px rgba(0,0,0,.22);
+.gh-chip i { font-size: 16px; line-height: 0; }
+.project-card:hover .gh-chip {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.22);
+}
+
+/* Stack above/below gracefully on small screens */
+@media (max-width: 575.98px) {
+  .project-card__meta { flex-direction: column; align-items: flex-start; }
 }
 
