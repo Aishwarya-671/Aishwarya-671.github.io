@@ -2206,3 +2206,14 @@ section,
   .project-card__meta { flex-direction: column; align-items: flex-start; }
 }
 
+.hero-buttons .mail-btn {
+  background: #25a244; /* green */
+  border: none;
+  color: #fff;
+}
+.hero-buttons .mail-btn:hover {
+  background: #1f7d36;
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(37,162,68,0.5);
+}
+
