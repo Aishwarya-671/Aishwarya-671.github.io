@@ -2289,3 +2289,56 @@ section,
 #footer .credits a:hover {
   color: var(--default-color);
 }
+
+/* Balanced layout (slightly bigger than compact, tidy spacing) */
+.hero-buttons--balanced {
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Button sizing tuned to your site scale */
+.hero-buttons--balanced .hero-btn {
+  padding: 12px 26px;       /* a touch bigger */
+  font-size: 1.02rem;       /* slightly larger text */
+  font-weight: 700;
+  border-radius: 48px;
+  gap: 10px;
+  line-height: 1.1;
+}
+
+/* Subtle hover so the row stays tidy */
+.hero-buttons--balanced .hero-btn:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+}
+
+/* GitHub style */
+.hero-buttons .github-btn {
+  background: #24292e;
+  border: none;
+  color: #fff;
+}
+.hero-buttons .github-btn:hover {
+  background: #1f2328;
+}
+
+/* Keep your existing resume/linkedin/contact color schemes working */
+.hero-buttons .resume-btn { /* already defined elsewhere */ }
+.hero-buttons .linkedin-btn { /* already defined elsewhere */ }
+.hero-buttons .contact-btn { /* already defined elsewhere */ }
+
+/* Optional: equal visual width on large screens for perfect alignment */
+@media (min-width: 992px) {
+  .hero-buttons--balanced .hero-btn {
+    min-width: 160px;        /* align edges nicely */
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* Small screens: prevent crowding */
+@media (max-width: 480px) {
+  .hero-buttons--balanced { gap: 12px; }
+  .hero-buttons--balanced .hero-btn { padding: 11px 20px; font-size: 0.98rem; }
+}
